@@ -1,6 +1,10 @@
 import { handleCounterOverflow } from "../helpers/counterOverflow";
 
-
+/**
+ * Generates a 10x10 grid populated with random alphabetic characters
+ * 
+ * @returns The generated grid, a multidimensional array of strings
+ */
 export function generateGrid() {
     const gridSize = [10, 10];
     const grid = [];
@@ -18,7 +22,13 @@ export function generateGrid() {
     return grid;
 }
 
-export function generateCode(grid: Array<string[]>) {
+/**
+ * Generates a two digit code from a given grid using the seconds of current time
+ * 
+ * @param grid a multidimensional array of strings
+ * @returns a two digit code string
+ */
+export function generateCode(grid: Array<string[]>): string {
     // Get current seconds in a string
     const secondsInDateString = (new Date()).getSeconds().toString().padStart(2, '0');
     const secondsInDate = [Number(secondsInDateString[0]), Number(secondsInDateString[1])];
@@ -48,12 +58,10 @@ export function generateCode(grid: Array<string[]>) {
     // If charsCounterMap has only one key, the selected chars are the same, so the count
     // is the same
     if (charsCounterMap.size < 2) {
-        const sameCount = handleCounterOverflow(charsCounterMap.get(selectedChars[0])!);
-        return [sameCount, sameCount];
+        const sameCount: string = handleCounterOverflow(charsCounterMap.get(selectedChars[0])!).toString();
+        return sameCount + sameCount;
     } else {
-        return [
-            handleCounterOverflow(charsCounterMap.get(selectedChars[0])!),
-            handleCounterOverflow(charsCounterMap.get(selectedChars[1])!)
-        ]
+        return handleCounterOverflow(charsCounterMap.get(selectedChars[0])!).toString()
+            + handleCounterOverflow(charsCounterMap.get(selectedChars[1])!).toString();
     }
 }
