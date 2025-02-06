@@ -1,7 +1,9 @@
-import { Express, Request, Response } from 'express';
-import { firstController } from '../controllers';
+import { Express } from 'express';
+import { generateGridController, healthCheckController } from '../controllers';
 
-const routerSetup = (app: Express) =>
-    app.get('/', firstController);
+const routerSetup = (app: Express) => {
+    app.get('/', healthCheckController);
+    app.get('/grid', generateGridController);
+}
 
 export default routerSetup;
