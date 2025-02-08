@@ -12,7 +12,13 @@ export function healthCheckController(req: Request, res: Response) {
  * Generate grid GET endpoint
  */
 export function generateGridController(req: Request, res: Response) {
-    const grid = generateGrid();
+    let grid = [];
+    if (req.query.char) {
+        grid = generateGrid(req.query.char as string);
+    } else {
+        grid = generateGrid();
+    }
+
     res.status(200).json(grid);
 }
 

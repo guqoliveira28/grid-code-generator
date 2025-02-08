@@ -3,9 +3,10 @@ import { handleCounterOverflow } from "../helpers/counterOverflow";
 /**
  * Generates a 10x10 grid populated with random alphabetic characters
  * 
+ * @param weightChar a char to fill 20% of the grid with (not required)
  * @returns The generated grid, a multidimensional array of strings
  */
-export function generateGrid() {
+export function generateGrid(weightChar?: string) {
     const gridSize = [10, 10];
     const grid = [];
 
@@ -17,6 +18,26 @@ export function generateGrid() {
             lineArray.push(String.fromCharCode(Math.floor(Math.random() * 26) + 97));
         }
         grid.push(lineArray);
+    }
+
+    if (weightChar) {
+        // get 20% of grid
+        const cellsToFill = Math.floor(grid.length * grid[0].length * 0.2);
+        const filledCellsPositions: string[] = [];
+        let filledCells = 0;
+        
+        while (filledCells < cellsToFill) {
+            let row = Math.floor(Math.random() * grid.length);
+            let col = Math.floor(Math.random() * grid[0].length);
+            let newPosition = `${row}-${col}`;
+    
+            // Ensure that the same position is not filled twice
+            if (!filledCellsPositions.find(position => position === newPosition)) {
+                grid[row][col] = weightChar;
+                filledCellsPositions.push(newPosition);
+                filledCells++;
+            }
+        }
     }
 
     return grid;
