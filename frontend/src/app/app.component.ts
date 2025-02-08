@@ -15,8 +15,21 @@ export class AppComponent {
     title = 'Generator Page';
     grid = gridTemplate;
     inputedChar = '';
+    inputDisabled = false;
 
     constructor(private readonly serverService: ServerService) { }
+
+    getChar(event: Event): void {
+        const char = (event.target as HTMLInputElement).value;
+        if (char.length < 2) {
+            this.inputedChar = char;
+        }
+
+        this.inputDisabled = true;
+        setTimeout(() => {
+            this.inputDisabled = false;
+        }, 4000);
+    }
 
     handleGenerateClick(): void {
         this.updateGrid();
