@@ -1,0 +1,11 @@
+<div class="footer">
+    @if (generating()) {
+    <div class="live">
+        <span class="red-dot"></span>
+        LIVE
+    </div>
+    }
+    <div class="code">
+        <span>Your Code: </span>{{ code() }}
+    </div>
+</div>

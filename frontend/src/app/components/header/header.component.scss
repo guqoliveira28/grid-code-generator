@@ -1,0 +1,89 @@
+$header-color: #8A9DA4;
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    margin-bottom: 4vh;
+
+    .char-input {
+        display: flex;
+        flex-direction: column;
+
+        label {
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 5px 0;
+            color: $header-color;
+        }
+
+        input {
+            width: 100px;
+            font-size: 1rem;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid $header-color;
+        }
+    }
+
+    .generate-button {
+        button {
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.5em 2rem;
+
+            color: #fff;
+            background-color: $header-color;
+            border: 0;
+            border-radius: 5px;
+        }
+    }
+
+
+    .clock {
+        .analog-clock {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid $header-color;
+        }
+
+        .hand {
+            position: absolute;
+        }
+
+        .hour {
+            background-color: $header-color;
+            height: 15px;
+            width: 3px;
+            top: 25%;
+            left: 24px;
+        }
+
+        .minute {
+            background-color: $header-color;
+            height: 3px;
+            width: 15px;
+            top: 23px;
+            left: 25%;
+        }
+
+        .center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            width: 6px;
+            height: 6px;
+            background-color: #fff;
+            border: 2px solid $header-color;
+            border-radius: 50%;
+          }
+    }
+}
