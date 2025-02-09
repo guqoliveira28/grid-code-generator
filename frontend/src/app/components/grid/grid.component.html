@@ -1,0 +1,13 @@
+<div class="grid">
+    @for (line of grid(); track $index) {
+    <div class="line">
+        @for (cell of line; track $index) {
+        <div class="cell">
+            <span>
+                {{ cell }}
+            </span>
+        </div>
+        }
+    </div>
+    }
+</div>

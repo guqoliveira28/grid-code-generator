@@ -1,0 +1,26 @@
+$grid-border: solid 1px #000;
+
+.grid {
+    max-height: 60vh;
+    height: 100%;
+    margin: 2vh auto;
+    border-top: $grid-border;
+    border-left: $grid-border;
+
+    .line {
+        display: flex;
+        flex-direction: row;
+        height: calc(60vh/10);
+
+        .cell {
+            border-right: $grid-border;
+            border-bottom: $grid-border;
+            height: 100%;
+            width: 100%;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
