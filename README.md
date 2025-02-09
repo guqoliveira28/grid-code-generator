@@ -61,3 +61,12 @@ Run this command on each application folder
    ```
 
    This will start the backend API on http://localhost:3000.
+
+## Backend API Endpoints
+
+| Endpoint        | Method | Description                               |
+|-----------------|--------|-------------------------------------------|
+| `/`             | GET    | Health check.                             |
+| `/grid`         | GET    | Generates a two dimensional grid with random characteres. Supports query parameters: `char`|
+| `/code`        | POST   | Generates a code based on a provided grid. Request body: `{ grid: Array<string[]> }` |
+
