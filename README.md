@@ -15,6 +15,7 @@ grid-code-generator/
 │   ├── src/
 │   │   ├── controllers/
 │   │   ├── helpers/
+│   │   ├── interfaces/
 │   │   ├── routes/
 │   │   └── services/
 │   ├── package.json
