@@ -4,6 +4,7 @@ This project is a full-stack application built with Node.js - Express and Angula
 
 ## Project Structure
 
+```
 grid-code-generator/
 ├── frontend/
 │   ├── app/
@@ -18,6 +19,7 @@ grid-code-generator/
 │   │   └── services/
 │   ├── package.json
 └── README.md
+```
 
 ## Getting Started
 
