@@ -68,5 +68,9 @@ Run this command on each application folder
 |-----------------|--------|-------------------------------------------|
 | `/`             | GET    | Health check.                             |
 | `/grid`         | GET    | Generates a two dimensional grid with random characteres. Supports query parameters: `char`|
-| `/code`        | POST   | Generates a code based on a provided grid. Request body: `{ grid: Array<string[]> }` |
+| `/code`         | POST   | Generates a code based on a provided grid. Request body: `{ grid: Array<string[]> }` |
+| `/payments`     | GET    | Retrieves all payments or a specific payment by name. Supports query parameters: `name` |
+| `/addpayment`   | POST   | Adds a payment. Request body: `{ name: string, ammount: number, code: string, grid: Array<string[]> }` |
+| `/updatepayment`| PUT    | Updates a payment by name. Request body: `{ name: string, ammount: number, code: string, grid: Array<string[]> }` |
+| `/deletepayment`| DELETE | Deletes a payment by name. Request body: `{ name: string }` |
 
