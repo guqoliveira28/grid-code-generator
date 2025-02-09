@@ -1,5 +1,4 @@
 import express from 'express';
-import routerSetup from './routes';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
@@ -15,4 +14,5 @@ app.listen(APP_PORT, () => {
     console.log(`Server started on port ${APP_PORT}`);
 });
 
-routerSetup(app);
+require('./routes/generator')(app);
+require('./routes/payments')(app);
