@@ -9,6 +9,11 @@ export class ServerService {
     private readonly http: HttpClient = inject(HttpClient);
 
     public getGrid(char?: string): Observable<Array<string[]>> {
-        return this.http.get<Array<string[]>>(`${this.url}/grid?char=${char}`);
+        const queryParams = char ? `?char=${char}` : '';
+        return this.http.get<Array<string[]>>(`${this.url}/grid${queryParams}`);
+    }
+
+    public getCode(grid: Array<string[]>): Observable<string> {
+        return this.http.post<string>(`${this.url}/code`, { grid: grid });
     }
 }

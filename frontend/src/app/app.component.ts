@@ -1,37 +1,29 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ServerService } from '../services/server.service';
+import { ServerService } from './services/server.service';
+import { FooterComponent } from "./components/footer/footer.component";
+import { GridComponent } from "./components/grid/grid.component";
+import { HeaderComponent } from "./components/header/header.component";
 
 const lineTemplate = Array.from({ length: 10 }, (v, k) => '');
 const gridTemplate = Array.from({ length: 10 }, (v, k) => lineTemplate);
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet],
+    imports: [RouterOutlet, FooterComponent, GridComponent, HeaderComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
 export class AppComponent {
-    title = 'Generator Page';
+    generating = false;
     grid = gridTemplate;
+
     inputedChar = '';
-    inputDisabled = false;
 
     constructor(private readonly serverService: ServerService) { }
-
-    getChar(event: Event): void {
-        const char = (event.target as HTMLInputElement).value;
-        if (char.length < 2) {
-            this.inputedChar = char;
-        }
-
-        this.inputDisabled = true;
-        setTimeout(() => {
-            this.inputDisabled = false;
-        }, 4000);
-    }
-
-    handleGenerateClick(): void {
+    
+    startGenerating(): void {
+        this.generating = true;
         this.updateGrid();
         setInterval(() => {
             this.updateGrid();
@@ -39,17 +31,8 @@ export class AppComponent {
     }
 
     private updateGrid(): void {
-        if (this.inputedChar !== '') {
-            this.serverService.getGrid(this.inputedChar).subscribe(
-                response => { this.grid = response; }
-            );
-        } else {
-            this.serverService.getGrid().subscribe(
-                response => { this.grid = response; }
-            );
-        }
+        this.serverService.getGrid(this.inputedChar !== '' ? this.inputedChar : undefined).subscribe(
+            response => { this.grid = response; }
+        );
     }
-
-
-
 }

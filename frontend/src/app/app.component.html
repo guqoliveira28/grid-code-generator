@@ -1,40 +1,9 @@
 <main class="main">
-    <div class="header">
-        <div class="char-input">
-            <label for="char">
-                Character:
-            </label>
-            <input id="char" maxlength="1" placeholder="Character"
-            (input)="getChar($event)" [disabled]="inputDisabled" />
-        </div>
+    <app-header (onGenerateBtnClick)="startGenerating()" [(inputedChar)]="inputedChar"></app-header>
 
-        <div class="clock">
-            🕛
-        </div>
+    <app-grid [grid]="grid"></app-grid>
 
-        <div class="generate-button">
-            <button (click)="handleGenerateClick()">Generate 2D Grid</button>
-        </div>
-
-    </div>
-
-    <div class="grid">
-        @for (line of grid; track $index) {
-        <div class="line">
-            @for (cell of line; track $index) {
-            <div class="cell">
-                <span>
-                    {{ cell }}
-                </span>
-            </div>
-            }
-        </div>
-        }
-    </div>
-
-    <div class="footer">
-
-    </div>
+    <app-footer [grid]="grid" [generating]="generating"></app-footer>
 </main>
 
 <router-outlet />
