@@ -2,6 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
+export interface IPayment {
+    name: string,
+    ammount: number,
+    code: string,
+    grid: Array<string[]>
+}
+
 @Injectable({ providedIn: 'root' })
 export class ServerService {
     private url = 'http://127.0.0.1:3000';
@@ -15,5 +22,9 @@ export class ServerService {
 
     public getCode(grid: Array<string[]>): Observable<string> {
         return this.http.post<string>(`${this.url}/code`, { grid: grid });
+    }
+
+    public getPayments(): Observable<IPayment[]> {
+        return this.http.get<IPayment[]>(`${this.url}/payments`);
     }
 }

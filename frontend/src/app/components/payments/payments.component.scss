@@ -1,0 +1,33 @@
+$table-border: solid 1px #000;
+
+.table {
+    margin: 2vh 0;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+
+        th,
+        td {
+            border: $table-border;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            color: #8A9DA4;
+            text-transform: uppercase;
+        }
+
+        .col1 {
+            width: 50%;
+        }
+
+        .col2,
+        .col3,
+        .col4 {
+            width: calc(50% / 3);
+        }
+
+    }
+}

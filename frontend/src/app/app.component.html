@@ -1,9 +1,25 @@
 <main class="main">
-    <app-header (onGenerateBtnClick)="startGenerating()" [(inputedChar)]="inputedChar"></app-header>
 
-    <app-grid [grid]="grid"></app-grid>
+    <div class="pages-btn" (click)="handlePageChange()">
+        @if (currentPage === 'payments-page') {
+            Payments Page
+        } @else {
+            Grid Page
+        }
 
-    <app-footer [grid]="grid" [generating]="generating"></app-footer>
+    </div>
+
+    @if (currentPage === 'generator-page') {
+        <app-header (onGenerateBtnClick)="startGenerating()" [(inputedChar)]="inputedChar"></app-header>
+    
+        <app-grid [grid]="grid"></app-grid>
+    }
+
+    <app-footer [grid]="grid" [generating]="generating" [(code)]="code"></app-footer>
+
+    @if (currentPage === 'payments-page') {
+        <app-payments [code]="code"></app-payments>
+    }
 </main>
 
 <router-outlet />

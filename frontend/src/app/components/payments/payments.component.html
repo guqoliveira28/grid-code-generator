@@ -1,0 +1,28 @@
+<div class="payments">
+    <div class="inputs">
+        
+    </div>
+
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col1">Name</th>
+                    <th class="col2">Ammount</th>
+                    <th class="col3">Code</th>
+                    <th class="col4">Grid</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (payment of payments; track payment.name) {
+                    <tr>
+                        <td class="col1">{{ payment.name }}</td>
+                        <td class="col2">{{ payment.ammount }}</td>
+                        <td class="col3">{{ payment.code }}</td>
+                        <td class="col4">{{ payment.grid.length * payment.grid[0].length }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

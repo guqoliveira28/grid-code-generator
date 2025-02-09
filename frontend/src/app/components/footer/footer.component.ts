@@ -1,4 +1,4 @@
-import { Component, input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, input, model, OnChanges, SimpleChanges } from '@angular/core';
 import { ServerService } from '../../services/server.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class FooterComponent implements OnChanges {
     generating = input(false);
     readonly grid = input.required<Array<string[]>>();
 
-    code = '';
+    code = model<string>('');
 
     constructor(private readonly serverService: ServerService) { }
 
@@ -19,7 +19,7 @@ export class FooterComponent implements OnChanges {
         if (changes['grid']) {
             if (this.grid()[0][0] !== '') {
                 this.serverService.getCode(this.grid()).subscribe(
-                    response => { this.code = response; }
+                    response => { this.code.update(() => response); }
                 );
             }
         }
