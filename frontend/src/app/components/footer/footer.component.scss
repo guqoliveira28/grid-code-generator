@@ -4,4 +4,39 @@
     justify-content: center;
     align-items: center;
     gap: 1vh;
+
+    .live {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        font-weight: 600;
+        line-height: 1;
+
+        .red-dot {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            background-color: #ff0000;
+            display: inline-block;
+            margin-right: 5px;
+        }
+    }
+
+    .code {
+        width: 30vw;
+        min-width: fit-content;
+        border: 1px solid #000;
+        border-radius: 5px;
+        padding: 20px 0;
+
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.2rem;
+
+        span {
+            color: #7c7c7c;
+        }
+    }
 }
