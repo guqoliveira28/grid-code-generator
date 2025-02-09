@@ -1,4 +1,4 @@
-import { Component, model, output } from '@angular/core';
+import { AfterViewInit, Component, model, output } from '@angular/core';
 
 @Component({
     selector: 'app-header',

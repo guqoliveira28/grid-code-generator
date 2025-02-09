@@ -5,7 +5,7 @@ $header-color: #8A9DA4;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    
+
     width: 100%;
     margin-bottom: 4vh;
 
@@ -42,5 +42,48 @@ $header-color: #8A9DA4;
             border: 0;
             border-radius: 5px;
         }
+    }
+
+
+    .clock {
+        .analog-clock {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid $header-color;
+        }
+
+        .hand {
+            position: absolute;
+        }
+
+        .hour {
+            background-color: $header-color;
+            height: 15px;
+            width: 3px;
+            top: 25%;
+            left: 24px;
+        }
+
+        .minute {
+            background-color: $header-color;
+            height: 3px;
+            width: 15px;
+            top: 23px;
+            left: 25%;
+        }
+
+        .center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            width: 6px;
+            height: 6px;
+            background-color: #fff;
+            border: 2px solid $header-color;
+            border-radius: 50%;
+          }
     }
 }
