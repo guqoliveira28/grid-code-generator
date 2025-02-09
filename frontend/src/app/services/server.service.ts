@@ -27,4 +27,13 @@ export class ServerService {
     public getPayments(): Observable<IPayment[]> {
         return this.http.get<IPayment[]>(`${this.url}/payments`);
     }
+
+    public addPayment(payment: IPayment): Observable<IPayment> {
+        return this.http.post<IPayment>(`${this.url}/addpayment`, {
+            name: payment.name,
+            ammount: payment.ammount,
+            code: payment.code,
+            grid: payment.grid
+        });
+    }
 }

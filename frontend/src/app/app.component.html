@@ -18,7 +18,7 @@
     <app-footer [grid]="grid" [generating]="generating" [(code)]="code"></app-footer>
 
     @if (currentPage === 'payments-page') {
-        <app-payments [code]="code"></app-payments>
+        <app-payments [code]="code" [grid]="grid"></app-payments>
     }
 </main>
 

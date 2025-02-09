@@ -1,6 +1,21 @@
 <div class="payments">
     <div class="inputs">
-        
+        <div>
+            <label for="name">
+                Payment
+            </label>
+            <input id="name" maxlength="40" placeholder="Payment" (input)="getName($event)" />
+        </div>
+        <div>
+            <label for="ammount">
+                Ammount
+            </label>
+            <input id="ammount" maxlength="5" placeholder="Ammount" type="number" (input)="getAmmount($event)" />
+        </div>
+
+        <div class="add-payment-btn">
+            <button (click)="handleAddPaymentClick()">+ ADD</button>
+        </div>
     </div>
 
     <div class="table">
@@ -14,13 +29,22 @@
                 </tr>
             </thead>
             <tbody>
-                @for (payment of payments; track payment.name) {
-                    <tr>
-                        <td class="col1">{{ payment.name }}</td>
-                        <td class="col2">{{ payment.ammount }}</td>
-                        <td class="col3">{{ payment.code }}</td>
-                        <td class="col4">{{ payment.grid.length * payment.grid[0].length }}</td>
-                    </tr>
+                @for (payment of payments; track $index) {
+                @if (payment) {
+                <tr>
+                    <td class="col1">{{ payment.name }}</td>
+                    <td class="col2">{{ payment.ammount }}</td>
+                    <td class="col3">{{ payment.code }}</td>
+                    <td class="col4">{{ payment.grid.length * payment.grid[0].length }}</td>
+                </tr>
+                } @else {
+                <tr>
+                    <td class="col1"></td>
+                    <td class="col2"></td>
+                    <td class="col3"></td>
+                    <td class="col4"></td>
+                </tr>
+                }
                 }
             </tbody>
         </table>
