@@ -60,3 +60,18 @@ Run this command on each application folder
    ```
 
    This will start the backend API on http://localhost:3000.
+
+## Run With Docker
+
+* Build and start the containers:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+* Access the application:
+
+   * **Frontend**: The frontend application will be accessible at http://localhost:4200 (or the port you've mapped in your docker-compose.yml file).
+
+   * **Backend**: The backend API will be accessible at http://localhost:3000 (or the port you've mapped).
+
