@@ -51,8 +51,12 @@ Run this command on each application folder
    npm run start
    ```
 
-   * Backend (from the backend directory):
+   This will start the frontend application on http://localhost:4200.
+
+* Backend (from the backend directory):
 
    ```bash
    npm run dev
    ```
+
+   This will start the backend API on http://localhost:3000.
