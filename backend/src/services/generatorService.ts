@@ -1,0 +1,88 @@
+import { handleCounterOverflow } from "../helpers/counterOverflow";
+
+/**
+ * Generates a 10x10 grid populated with random alphabetic characters
+ * 
+ * @param weightChar a char to fill 20% of the grid with (not required)
+ * @returns The generated grid, a multidimensional array of strings
+ */
+export function generateGrid(weightChar?: string) {
+    const gridSize = [10, 10];
+    const grid = [];
+
+    // Iterate through lines and columns of the grid
+    for (let line = 0; line < gridSize[0]; line++) {
+        const lineArray = [];
+        for (let column = 0; column < gridSize[1]; column++) {
+            // Generate a random char [a-z] - from charCode 97 to 122
+            lineArray.push(String.fromCharCode(Math.floor(Math.random() * 26) + 97));
+        }
+        grid.push(lineArray);
+    }
+
+    if (weightChar) {
+        // get 20% of grid
+        const cellsToFill = Math.floor(grid.length * grid[0].length * 0.2);
+        const filledCellsPositions: string[] = [];
+        let filledCells = 0;
+        
+        while (filledCells < cellsToFill) {
+            let row = Math.floor(Math.random() * grid.length);
+            let col = Math.floor(Math.random() * grid[0].length);
+            let newPosition = `${row}-${col}`;
+    
+            // Ensure that the same position is not filled twice
+            if (!filledCellsPositions.find(position => position === newPosition)) {
+                grid[row][col] = weightChar;
+                filledCellsPositions.push(newPosition);
+                filledCells++;
+            }
+        }
+    }
+
+    return grid;
+}
+
+/**
+ * Generates a two digit code from a given grid using the seconds of current time
+ * 
+ * @param grid a multidimensional array of strings
+ * @returns a two digit code string
+ */
+export function generateCode(grid: Array<string[]>): string {
+    // Get current seconds in a string
+    const secondsInDateString = (new Date()).getSeconds().toString().padStart(2, '0');
+    const secondsInDate = [Number(secondsInDateString[0]), Number(secondsInDateString[1])];
+
+    const selectedChars = [
+        grid[secondsInDate[0]][secondsInDate[1]],
+        grid[secondsInDate[1]][secondsInDate[0]]
+    ];
+
+    // Map with selected char and char count pair
+    const charsCounterMap: Map<string, number> = new Map();
+    charsCounterMap.set(selectedChars[0], 0);
+    charsCounterMap.set(selectedChars[1], 0);
+
+    // Iterate through a multidimensional array
+    grid.forEach((line) => {
+        line.forEach((char: string) => {
+            if (char === selectedChars[0]) {
+                // The selectedCharsMap.get will never be undefined as it is set beforehand
+                charsCounterMap.set(selectedChars[0], charsCounterMap.get(selectedChars[0])! + 1);
+            } else if (char === selectedChars[1]) {
+                charsCounterMap.set(selectedChars[1], charsCounterMap.get(selectedChars[1])! + 1);
+            }
+        })
+    });
+
+    // If charsCounterMap has only one key, the selected chars are the same, so the count
+    // is the same
+    if (charsCounterMap.size < 2) {
+        const sameCount: string = handleCounterOverflow(charsCounterMap.get(selectedChars[0])!).toString();
+        return sameCount + sameCount;
+    } else {
+        return handleCounterOverflow(charsCounterMap.get(selectedChars[0])!).toString()
+            + handleCounterOverflow(charsCounterMap.get(selectedChars[1])!).toString();
+    }
+}
