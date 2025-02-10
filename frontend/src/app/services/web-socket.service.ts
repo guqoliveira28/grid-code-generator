@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { io, Socket } from "socket.io-client";
+import { IPayment } from "./server.service";
 
 @Injectable({ providedIn: 'root' })
 export class WebSocketService {
@@ -19,5 +20,9 @@ export class WebSocketService {
 
     onCodeUpdate(callback: (code: string) => void): void {
         this.webSocket.on('code', callback)
+    }
+
+    onPaymentsUpdate(callback: (payments: (IPayment | undefined)[]) => void): void {
+        this.webSocket.on('payments', callback)
     }
 }

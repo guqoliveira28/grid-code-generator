@@ -1,5 +1,6 @@
 import { Component, input, OnInit } from '@angular/core';
 import { IPayment, ServerService } from '../../services/server.service';
+import { WebSocketService } from '../../services/web-socket.service';
 
 @Component({
     selector: 'app-payments',
@@ -18,9 +19,17 @@ export class PaymentsComponent implements OnInit {
         ammount: 0
     };
 
-    constructor(private readonly serverService: ServerService) { }
+    constructor(
+        private readonly serverService: ServerService,
+        private readonly socketService: WebSocketService,
+    ) { }
 
     ngOnInit(): void {
+        this.socketService.onPaymentsUpdate((payments: (IPayment | undefined)[]) => {
+            this.payments = payments;
+            this.addNewLines();
+        });
+
         this.updatePayments();
     }
 
