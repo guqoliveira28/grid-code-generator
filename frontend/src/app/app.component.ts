@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ServerService } from './services/server.service';
 import { FooterComponent } from "./components/footer/footer.component";
 import { GridComponent } from "./components/grid/grid.component";
 import { HeaderComponent } from "./components/header/header.component";
 import { PaymentsComponent } from "./components/payments/payments.component";
+import { WebSocketService } from './services/web-socket.service';
 
 const lineTemplate = Array.from({ length: 10 }, (v, k) => '');
 const gridTemplate = Array.from({ length: 10 }, (v, k) => lineTemplate);
@@ -15,7 +16,7 @@ const gridTemplate = Array.from({ length: 10 }, (v, k) => lineTemplate);
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
     // Simple approach to handle multiple pages
     // This should have a more complex logic for better development and scalability
     currentPage: 'generator-page' | 'payments-page' = 'generator-page';
@@ -26,20 +27,23 @@ export class AppComponent {
     inputedChar = '';
     code = '';
 
-    constructor(private readonly serverService: ServerService) { }
+    constructor(private readonly socketService: WebSocketService) { }
 
-    startGenerating(): void {
-        this.generating = true;
-        this.updateGrid();
-        setInterval(() => {
-            this.updateGrid();
-        }, 2000);
+    ngOnInit(): void {
+        this.socketService.onGridUpdate((grid: Array<string[]>) => {
+            if (grid && grid.length > 0) {
+                this.generating = true;
+            }
+            this.grid = grid;
+        });
+
+        this.socketService.onCodeUpdate((code: string) => {
+            this.code = code;
+        });
     }
 
-    private updateGrid(): void {
-        this.serverService.getGrid(this.inputedChar !== '' ? this.inputedChar : undefined).subscribe(
-            response => { this.grid = response; }
-        );
+    startGenerating(): void {
+        this.socketService.startGenerating();
     }
 
     handlePageChange() {
